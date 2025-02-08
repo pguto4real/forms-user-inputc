@@ -5,17 +5,19 @@ function shareOpinionAction(prevFormState, formData) {
   const userName = formData.get("userName");
   const title = formData.get("title");
   const body = formData.get("body");
-  console.log(userName)
+  console.log(userName);
   let errors = [];
-
+  console.log(!isNotEmpty(body));
+  console.log(!hasMinLength(body, 10));
+  console.log(hasMinLength(body, 300));
   if (!isNotEmpty(userName)) {
     errors.push("You must provide a userName");
   }
   if (!isNotEmpty(title) || !hasMinLength(body, 15)) {
     errors.push("Title must be at least five character long");
   }
-  if (!isNotEmpty(body) || !hasMinLength(body, 300)) {
-    errors.push("You must provide a body with at least fifteen characters");
+  if (!isNotEmpty(body) || hasMinLength(body, 300) || !hasMinLength(body, 10)) {
+    errors.push("Opinion must be between 10 and 300 character long");
   }
 
   if (errors.length > 0) {
