@@ -1,38 +1,46 @@
 import { useActionState } from "react";
 import { hasMinLength, isNotEmpty } from "../util/validation";
+import { use } from "react";
+import { OpinionsContext } from "../store/opinions-context";
 
-function shareOpinionAction(prevFormState, formData) {
-  const userName = formData.get("userName");
-  const title = formData.get("title");
-  const body = formData.get("body");
-  console.log(userName);
-  let errors = [];
+export function NewOpinion() {
+  const { addOpinion } = use(OpinionsContext);
+  function shareOpinionAction(prevFormState, formData) {
+    const userName = formData.get("userName");
+    const title = formData.get("title");
+    const body = formData.get("body");
+    console.log(userName);
+    let errors = [];
 
-  if (!isNotEmpty(userName)) {
-    errors.push("You must provide a userName");
-  }
-  if (!isNotEmpty(title) || !hasMinLength(body, 15)) {
-    errors.push("Title must be at least five character long");
-  }
-  if (!isNotEmpty(body) || hasMinLength(body, 300) || !hasMinLength(body, 10)) {
-    errors.push("Opinion must be between 10 and 300 character long");
-  }
+    if (!isNotEmpty(userName)) {
+      errors.push("You must provide a userName");
+    }
+    if (!isNotEmpty(title) || !hasMinLength(body, 15)) {
+      errors.push("Title must be at least five character long");
+    }
+    if (
+      !isNotEmpty(body) ||
+      hasMinLength(body, 300) ||
+      !hasMinLength(body, 10)
+    ) {
+      errors.push("Opinion must be between 10 and 300 character long");
+    }
 
-  if (errors.length > 0) {
+    if (errors.length > 0) {
+      return {
+        errors,
+        enteredValues: {
+          userName,
+          title,
+          body,
+        },
+      };
+    }
+    addOpinion({ title, body, userName });
     return {
-      errors,
-      enteredValues: {
-        userName,
-        title,
-        body,
-      },
+      errors: null,
     };
   }
-  return {
-    errors: null,
-  };
-}
-export function NewOpinion() {
   const [formState, formAction] = useActionState(shareOpinionAction, {
     errors: null,
   });

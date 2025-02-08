@@ -15,6 +15,7 @@ export function OpinionsContextProvider({ children }) {
       const response = await fetch('http://localhost:3000/opinions');
       const opinions = await response.json();
       setOpinions(opinions);
+      console.log(opinions)
     }
 
     loadOpinions();
@@ -28,7 +29,7 @@ export function OpinionsContextProvider({ children }) {
       },
       body: JSON.stringify(enteredOpinionData),
     });
-
+console.log(response)
     if (!response.ok) {
       return;
     }
