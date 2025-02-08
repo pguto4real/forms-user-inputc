@@ -1,11 +1,10 @@
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
-
-  function upVoteAction(){
-    console.log('up')
+  function upVoteAction() {
+    console.log("up");
   }
 
-  function downVoteAction(){
-console.log('down')
+  function downVoteAction() {
+    console.log("down");
   }
   return (
     <article>
