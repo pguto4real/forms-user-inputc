@@ -11,10 +11,10 @@ function shareOpinionAction(prevFormState, formData) {
   if (!isNotEmpty(userName)) {
     errors.push("You must provide a userName");
   }
-  if (!isNotEmpty(title)) {
-    errors.push("You must provide a title");
+  if (!isNotEmpty(title) || !hasMinLength(body, 15)) {
+    errors.push("Title must be at least five character long");
   }
-  if (!isNotEmpty(body) || !hasMinLength(body, 15)) {
+  if (!isNotEmpty(body) || !hasMinLength(body, 300)) {
     errors.push("You must provide a body with at least fifteen characters");
   }
 
