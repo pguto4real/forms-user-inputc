@@ -7,9 +7,7 @@ function shareOpinionAction(prevFormState, formData) {
   const body = formData.get("body");
   console.log(userName);
   let errors = [];
-  console.log(!isNotEmpty(body));
-  console.log(!hasMinLength(body, 10));
-  console.log(hasMinLength(body, 300));
+
   if (!isNotEmpty(userName)) {
     errors.push("You must provide a userName");
   }
