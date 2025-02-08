@@ -71,7 +71,7 @@ export function NewOpinion() {
           ></textarea>
         </p>
         {formState.errors && (
-          <ul className="error">
+          <ul className="errors">
             {formState.errors.map((error) => (
               <li key={error}>{error}</li>
             ))}
